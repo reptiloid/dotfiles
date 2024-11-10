@@ -32,4 +32,12 @@ return {
   { 'gorkunov/smartpairs.vim', lazy = false },
 
   { 'tpope/vim-surround', lazy = false },
+
+  {
+    'echasnovski/mini.completion',
+    version = false,
+    config = function()
+      require('mini.completion').setup()
+    end,
+  },
 }
