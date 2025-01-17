@@ -4,7 +4,7 @@
 #+EXCLUDE_TAGS: noexport
 
 This is my simple qtile config.
-[[./screensho/2025.png]]
+[[./screenshots/2025.png]]
 
 * imports :noexport:
 Here goes imports
