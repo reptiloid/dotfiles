@@ -1,11 +1,11 @@
 #+TITLE: Qtile Config
 #+PROPERTY: header-args :tangle config.py
 #+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport
 
-* Config :export:
 This is my simple qtile config.
 
-* imports
+* imports :noexport:
 Here goes imports
 
 #+begin_src python :exports (when (eq org-export-current-backend 'md) "none")
@@ -40,7 +40,7 @@ enter = "Return"
 
 #+end_src
 
-* cmds vars
+* cmds vars :noexport:
 #+begin_src python :exports (when (eq org-export-current-backend 'md) "none")
 st_terminal = "st"
 kitty_terminal = "/home/rep/.local/kitty.app/bin/kitty"
@@ -55,17 +55,35 @@ change_bg = "feh --bg-fill -z /home/rep/Pictures/walls"
 #+end_src
 
 
-* keys :export:
+* binds :export:
 
 A list of available commands that can be bound to keys can be found
 at https://docs.qtile.org/en/latest/manual/config/lazy.html
 
-| key   | action       |
-|-------+--------------|
-| win-h | next monitor |
-| win-a | to screen 1  |
-| win-g | to screen 2  |
-|       |              |
+| key        | action               |
+|------------+----------------------|
+| win-h      | next monitor         |
+| win-a      | to screen 1          |
+| win-g      | to screen 2          |
+| win-spc    | focus next window    |
+|            |                      |
+| win-tab    | next layout          |
+|            |                      |
+| win-r      | spawn cmd            |
+| win-c      | start rofi launcher  |
+| win-n      | change wallpaper     |
+| win-enter  | start st terminal    |
+| win-t      | start kitty terminal |
+|            |                      |
+| win-b      | show/hide bar        |
+|            |                      |
+| win-w      | kill focused window  |
+|            |                      |
+| win-ctrl-r | reload config        |
+| win-ctrl-q | quit qtile           |
+|            |                      |
+| alt-f4     | shutdown memu        |
+| win-0      | shutdown memu        |
 
 
 #+begin_src python :exports (when (eq org-export-current-backend 'md) "none")
@@ -121,8 +139,10 @@ keys = [
 
 #+end_src
 
+#+RESULTS:
 
-* groups
+
+* groups :noexport:
 
 #+begin_src python :exports (when (eq org-export-current-backend 'md) "none")
 
@@ -171,7 +191,7 @@ for k, group in zip(["y", "u", "i", "o", ], groups):
 #+end_src
 
 
-* scratchpad
+* scratchpad :noexport:
 
 #+begin_src python
 
@@ -214,7 +234,7 @@ keys.extend(
 #+end_src
 
 
-* layouts
+* layouts :noexport:
 Try more layouts by unleashing below layouts.
 
 #+begin_src python
@@ -239,7 +259,7 @@ layouts = [
 
 #+end_src
 
-* screens
+* screens :noexport:
 
 #+begin_src python
 
@@ -302,7 +322,7 @@ screens = [
 #+end_src
 
 
-* mouse
+* mouse :noexport:
 Drag floating layouts.
 
 #+begin_src python
@@ -324,7 +344,7 @@ mouse = [
 #+end_src
 
 
-* options
+* options :noexport:
 
 #+begin_src python
 
@@ -375,7 +395,7 @@ wl_input_rules = None
 wmname = "LG3D"
 #+end_src
 
-* autostart
+* autostart :noexport:
 
 ** set wallpaper
 #+begin_src python
