@@ -4,6 +4,7 @@
 #+EXCLUDE_TAGS: noexport
 
 This is my simple qtile config.
+[[./screensho/2025.png]]
 
 * imports :noexport:
 Here goes imports
@@ -64,13 +65,13 @@ at https://docs.qtile.org/en/latest/manual/config/lazy.html
 
 | key        | action               |
 |------------+----------------------|
+| win-w      | kill focused window  |
 | win-h      | next monitor         |
 | win-a      | to screen 1          |
 | win-g      | to screen 2          |
 | win-spc    | focus next window    |
 | win-tab    | next layout          |
 | win-b      | show/hide bar        |
-| win-w      | kill focused window  |
 
 
 ** run commands
@@ -89,8 +90,8 @@ at https://docs.qtile.org/en/latest/manual/config/lazy.html
 |------------+----------------------|
 | win-ctrl-r | reload config        |
 | win-ctrl-q | quit qtile           |
-| alt-f4     | shutdown memu        |
-| win-0      | shutdown memu        |
+| alt-f4     | shutdown menu        |
+| win-0      | shutdown menu        |
 
 
 #+begin_src python :exports (when (eq org-export-current-backend 'md) "none")
