@@ -1,3 +1,10 @@
+#+TITLE: Qtile Config
+#+PROPERTY: header-args :tangle config.py
+
+* Config
+
+** imports
+#+begin_src python
 from libqtile import bar, layout, widget, hook
 from libqtile.config import (
     Click,
@@ -17,12 +24,20 @@ import os
 import platform
 import subprocess
 
+#+end_src
+
+** keys vars
+#+begin_src python
 ctrl  = "control"
 alt   = "mod1"
 win   = "mod4"
 shift = "shift"
 enter = "Return"
 
+#+end_src
+
+** terminals
+#+begin_src python
 st_terminal = "st"
 kitty_terminal = "/home/rep/.local/kitty.app/bin/kitty"
 yazi_filemanager = "/home/rep/.local/kitty.app/bin/kitty yazi"
@@ -33,7 +48,15 @@ change_bg = "feh --bg-fill -z /home/rep/Pictures/walls"
 # change_bg = "bash /home/rep/.local/debinstall/wallpaper.sh select"
 # change_bg = "feh --bg-fill -z /home/rep/Pictures/walls"
 # change_bg_unsplash = "feh --bg-fill -z /home/rep/Pictures/walls/"
+#+end_src
 
+
+** keys
+
+A list of available commands that can be bound to keys can be found
+at https://docs.qtile.org/en/latest/manual/config/lazy.html
+
+#+begin_src python
 keys = [
     # Switch between windows
     # Key([win], "h", lazy.layout.left(), desc="Move focus to left"),
@@ -81,6 +104,13 @@ keys = [
     Key([win], "b", lazy.hide_show_bar(position="bottom")),
 ]
 
+#+end_src
+
+
+** groups
+
+#+begin_src python
+
 groups = [
     Group(
         "",
@@ -109,6 +139,11 @@ groups = [
     ),
     # Group("󰎞", layout="tile"),
 ]
+#+end_src
+
+
+*** groups keys
+#+begin_src python
 
 for k, group in zip(["y", "u", "i", "o", ], groups):
     keys.extend(
@@ -117,6 +152,13 @@ for k, group in zip(["y", "u", "i", "o", ], groups):
             Key([win, shift], k, lazy.window.togroup(group.name, switch_group=True)),
         ]
     )
+
+#+end_src
+
+
+** scratchpad
+
+#+begin_src python
 
 groups.append(
     ScratchPad(
@@ -154,7 +196,13 @@ keys.extend(
         Key([win], "s", lazy.group["scratchpad"].dropdown_toggle("st term")),
     ]
 )
+#+end_src
 
+
+** layouts
+Try more layouts by unleashing below layouts.
+
+#+begin_src python
 layouts = [
     layout.Columns(
         border_focus_stack=["#d75f5f", "#8f3d3d"],
@@ -173,6 +221,12 @@ layouts = [
     # layout.VerticalTile(),
     # layout.Zoomy(),
 ]
+
+#+end_src
+
+** screens
+
+#+begin_src python
 
 widget_defaults = dict(
     font="JetBrainsMono Nerd Font",
@@ -230,6 +284,13 @@ screens = [
     ),
     Screen()
 ]
+#+end_src
+
+
+** mouse
+Drag floating layouts.
+
+#+begin_src python
 
 mouse = [
     Drag(
@@ -244,12 +305,25 @@ mouse = [
     Click([win], "Button2", lazy.window.bring_to_front()),
 ]
 
+
+#+end_src
+
+
+** options
+
+#+begin_src python
+
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
 follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
 
+
+#+end_src
+
+*** floating
+#+begin_src python
 floating_layout = layout.Floating(
     border_focus="#A6A867",
     border_normal="#262729",
@@ -267,6 +341,11 @@ floating_layout = layout.Floating(
     ],
 )
 
+#+end_src
+
+
+*** more options
+#+begin_src python
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
@@ -288,12 +367,24 @@ wl_input_rules = None
 # java that happens to be on java's whitelist.
 wmname = "LG3D"
 
+#+end_src
+
+** autostart
+
+*** set wallpaper
+#+begin_src python
 @hook.subscribe.startup_once
 def autostart():
     wallpaper = os.path.expanduser("~/.config/qtile/scripts/wallpaper.sh")
     # subprocess.call("screenlayout")
     subprocess.call([wallpaper])
 
+#+end_src
+
+*** restart on randr screen change
+#+begin_src python
 # @hook.subscribe.screen_change
 # def restart_on_randr(qtile, ev):
 #     qtile.cmd_restart()
+
+#+end_src
