@@ -60,17 +60,20 @@ change_bg = "feh --bg-fill -z /home/rep/Pictures/walls"
 A list of available commands that can be bound to keys can be found
 at https://docs.qtile.org/en/latest/manual/config/lazy.html
 
+** windows manipulations
+
 | key        | action               |
 |------------+----------------------|
 | win-h      | next monitor         |
 | win-a      | to screen 1          |
 | win-g      | to screen 2          |
 | win-spc    | focus next window    |
-|            |                      |
 | win-tab    | next layout          |
 | win-b      | show/hide bar        |
+| win-w      | kill focused window  |
 
 
+** run commands
 
 | key        | action               |
 |------------+----------------------|
@@ -80,15 +83,12 @@ at https://docs.qtile.org/en/latest/manual/config/lazy.html
 | win-enter  | start st terminal    |
 | win-t      | start kitty terminal |
 
-
+** reload/quit commands
 
 | key        | action               |
 |------------+----------------------|
-| win-w      | kill focused window  |
-|            |                      |
 | win-ctrl-r | reload config        |
 | win-ctrl-q | quit qtile           |
-|            |                      |
 | alt-f4     | shutdown memu        |
 | win-0      | shutdown memu        |
 
