@@ -68,15 +68,22 @@ at https://docs.qtile.org/en/latest/manual/config/lazy.html
 | win-spc    | focus next window    |
 |            |                      |
 | win-tab    | next layout          |
-|            |                      |
+| win-b      | show/hide bar        |
+
+
+
+| key        | action               |
+|------------+----------------------|
 | win-r      | spawn cmd            |
 | win-c      | start rofi launcher  |
 | win-n      | change wallpaper     |
 | win-enter  | start st terminal    |
 | win-t      | start kitty terminal |
-|            |                      |
-| win-b      | show/hide bar        |
-|            |                      |
+
+
+
+| key        | action               |
+|------------+----------------------|
 | win-w      | kill focused window  |
 |            |                      |
 | win-ctrl-r | reload config        |
