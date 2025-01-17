@@ -1,9 +1,13 @@
 #+TITLE: Qtile Config
 #+PROPERTY: header-args :tangle config.py
+#+SELECT_TAGS: export
 
-* Config
+* Config :export:
+This is my simple qtile config.
 
-** imports
+* imports
+Here goes imports
+
 #+begin_src python :exports (when (eq org-export-current-backend 'md) "none")
 from libqtile import bar, layout, widget, hook
 from libqtile.config import (
@@ -26,7 +30,7 @@ import subprocess
 
 #+end_src
 
-** keys vars
+* keys vars :export:
 #+begin_src python
 ctrl  = "control"
 alt   = "mod1"
@@ -36,8 +40,8 @@ enter = "Return"
 
 #+end_src
 
-** cmds vars
-#+begin_src python
+* cmds vars
+#+begin_src python :exports (when (eq org-export-current-backend 'md) "none")
 st_terminal = "st"
 kitty_terminal = "/home/rep/.local/kitty.app/bin/kitty"
 yazi_filemanager = "/home/rep/.local/kitty.app/bin/kitty yazi"
@@ -51,7 +55,7 @@ change_bg = "feh --bg-fill -z /home/rep/Pictures/walls"
 #+end_src
 
 
-** keys
+* keys :export:
 
 A list of available commands that can be bound to keys can be found
 at https://docs.qtile.org/en/latest/manual/config/lazy.html
@@ -118,9 +122,9 @@ keys = [
 #+end_src
 
 
-** groups
+* groups
 
-#+begin_src python
+#+begin_src python :exports (when (eq org-export-current-backend 'md) "none")
 
 groups = [
     Group(
@@ -153,7 +157,7 @@ groups = [
 #+end_src
 
 
-*** groups keys
+** groups keys
 #+begin_src python
 
 for k, group in zip(["y", "u", "i", "o", ], groups):
@@ -167,7 +171,7 @@ for k, group in zip(["y", "u", "i", "o", ], groups):
 #+end_src
 
 
-** scratchpad
+* scratchpad
 
 #+begin_src python
 
@@ -210,7 +214,7 @@ keys.extend(
 #+end_src
 
 
-** layouts
+* layouts
 Try more layouts by unleashing below layouts.
 
 #+begin_src python
@@ -235,7 +239,7 @@ layouts = [
 
 #+end_src
 
-** screens
+* screens
 
 #+begin_src python
 
@@ -298,7 +302,7 @@ screens = [
 #+end_src
 
 
-** mouse
+* mouse
 Drag floating layouts.
 
 #+begin_src python
@@ -320,7 +324,7 @@ mouse = [
 #+end_src
 
 
-** options
+* options
 
 #+begin_src python
 
@@ -333,7 +337,7 @@ cursor_warp = False
 
 #+end_src
 
-*** floating
+** floating
 #+begin_src python
 floating_layout = layout.Floating(
     border_focus="#A6A867",
@@ -355,7 +359,7 @@ floating_layout = layout.Floating(
 #+end_src
 
 
-*** more options
+** more options
 #+begin_src python
 auto_fullscreen = True
 focus_on_window_activation = "smart"
@@ -371,9 +375,9 @@ wl_input_rules = None
 wmname = "LG3D"
 #+end_src
 
-** autostart
+* autostart
 
-*** set wallpaper
+** set wallpaper
 #+begin_src python
 @hook.subscribe.startup_once
 def autostart():
@@ -382,7 +386,7 @@ def autostart():
 
 #+end_src
 
-*** restart on randr screen change
+** restart on randr screen change
 #+begin_src python
 # @hook.subscribe.screen_change
 # def restart_on_randr(qtile, ev):

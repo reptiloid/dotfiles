@@ -44,12 +44,14 @@ keys = [
     Key([win], "j", lazy.layout.down(), desc="Move focus down"),
     Key([win], "k", lazy.layout.up(), desc="Move focus up"),
     Key([win], "space", lazy.layout.next(), desc="Move window focus to other window"),
+
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
     Key([win, shift], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
     Key([win, shift], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
     Key([win, shift], "j", lazy.layout.shuffle_down(), desc="Move window down"),
     Key([win, shift], "k", lazy.layout.shuffle_up(), desc="Move window up"),
+
     # Grow windows. If current window is on the edge of screen and direction
     # will be to screen edge - window would shrink.
     Key([win, ctrl], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
@@ -57,6 +59,7 @@ keys = [
     Key([win, ctrl], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([win, ctrl], "k", lazy.layout.grow_up(), desc="Grow window up"),
     # Key([win], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
+
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
@@ -278,20 +281,11 @@ auto_minimize = True
 # When using the Wayland backend, this can be used to configure input devices.
 wl_input_rules = None
 
-# XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
-# string besides java UI toolkits; you can see several discussions on the
-# mailing lists, GitHub issues, and other WM documentation that suggest setting
-# this string if your java app doesn't work correctly. We may as well just lie
-# and say that we're a working one by default.
-#
-# We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
-# java that happens to be on java's whitelist.
 wmname = "LG3D"
 
 @hook.subscribe.startup_once
 def autostart():
     wallpaper = os.path.expanduser("~/.config/qtile/scripts/wallpaper.sh")
-    # subprocess.call("screenlayout")
     subprocess.call([wallpaper])
 
 # @hook.subscribe.screen_change
