@@ -25,14 +25,11 @@ enter = "Return"
 
 st_terminal = "st"
 kitty_terminal = "/home/rep/.local/kitty.app/bin/kitty"
-yazi_filemanager = "/home/rep/.local/kitty.app/bin/kitty yazi"
 # rofi = "/home/rep/.config/rofi/launchers/type-1/launcher.sh"
 rofi = "rofi -show drun"
 shutdown = "/home/rep/.config/rofi/powermenu/type-2/powermenu.sh"
 change_bg = "feh --bg-fill -z /home/rep/Pictures/walls"
 # change_bg = "bash /home/rep/.local/debinstall/wallpaper.sh select"
-# change_bg = "feh --bg-fill -z /home/rep/Pictures/walls"
-# change_bg_unsplash = "feh --bg-fill -z /home/rep/Pictures/walls/"
 
 keys = [
     # Switch between windows
@@ -93,12 +90,12 @@ groups = [
         ],
     ),
     Group(
-        "",
+        "",
         layout="monadtall",
         matches=[Match(wm_class=["virt-manager", "nomacs", "ristretto", "nitrogen"])],
     ),
     Group(
-        "󱋊",
+        "",
         layout="max",
         matches=[Match(wm_class=["qpdfview", "thunar", "nemo", "caja", "pcmanfm"])],
     ),
@@ -117,7 +114,7 @@ for k, group in zip(["y", "u", "i", "o", ], groups):
     keys.extend(
         [
             Key([win], k, lazy.group[group.name].toscreen()),
-            Key([win, shift], k, lazy.window.togroup(group.name, switch_group=True)),
+            Key([win, shift], k, lazy.window.togroup(group.name, switch_group=False)),
         ]
     )
 
@@ -135,25 +132,12 @@ groups.append(
                 height=0.425,
                 on_focus_lost_hide=False,
             ),
-            # DropDown(
-            #     "yazi_filemanager", yazi_filemanager, x=0.05, y=0.05, width=0.9, height=0.9, opacity=0.99, on_focus_lost_hide=True,
-            # ),
-
-            # DropDown(
-            #     "pcmanfm", "pcmanfm", x=0.02, y=0.02, width=0.95, height=0.95, opacity=1, on_focus_lost_hide=True,
-            # ),
         ],
     )
 )
 
 keys.extend(
     [
-        # KeyChord([win], "s", [
-        #     Key([], 't', lazy.group['scratchpad'].dropdown_toggle('term')),
-        #     Key([], 'f', lazy.group['scratchpad'].dropdown_toggle('filemanager')),
-        # ]),
-        # Key([win], 'g', lazy.group['scratchpad'].dropdown_toggle('pcmanfm')),
-        # Key([alt], enter, lazy.group["scratchpad"].dropdown_toggle("yazi_filemanager")),
         Key([win], "s", lazy.group["scratchpad"].dropdown_toggle("st term")),
     ]
 )
@@ -285,9 +269,5 @@ wmname = "LG3D"
 
 @hook.subscribe.startup_once
 def autostart():
-    wallpaper = os.path.expanduser("~/.config/qtile/scripts/wallpaper.sh")
-    subprocess.call([wallpaper])
-
-# @hook.subscribe.screen_change
-# def restart_on_randr(qtile, ev):
-#     qtile.cmd_restart()
+    script = os.path.expanduser("~/.config/qtile/scripts/script.sh")
+    subprocess.call([script])

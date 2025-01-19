@@ -6,7 +6,7 @@ set -o errexit  # exit on error
 setxkbmap -option grp:caps_toggle us,ru &
 
 # picom --transparent-clipping &
-/user/bin/emacs --daemon &
+/usr/bin/emacs --daemon &
 opensnitch-ui &
 feh --bg-fill ~/Pictures/walls/3.jpg &
 # feh --bg-fill -z ~/Pictures/walls

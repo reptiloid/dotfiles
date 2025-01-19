@@ -6,8 +6,6 @@
 This is my simple qtile config.
 [[./screenshots/2025.png]]
 
-* imports :noexport:
-Here goes imports
 
 #+begin_src python :exports (when (eq org-export-current-backend 'md) "none")
 from libqtile import bar, layout, widget, hook
@@ -31,7 +29,6 @@ import subprocess
 
 #+end_src
 
-* keys vars :export:
 #+begin_src python
 ctrl  = "control"
 alt   = "mod1"
@@ -41,7 +38,6 @@ enter = "Return"
 
 #+end_src
 
-* cmds vars :noexport:
 #+begin_src python :exports (when (eq org-export-current-backend 'md) "none")
 st_terminal = "st"
 kitty_terminal = "/home/rep/.local/kitty.app/bin/kitty"
@@ -53,7 +49,7 @@ change_bg = "feh --bg-fill -z /home/rep/Pictures/walls"
 #+end_src
 
 
-* binds :export:
+* 🔥 binds 🔥 :export:
 
 [[./screenshots/win-ctrl-r.png]]
 A list of available commands that can be bound to keys can be found
@@ -193,7 +189,7 @@ groups = [
 | o   |     4 |
 
 *** move window to group : win-shift-[key]
-*** switch to group : win-shift-[key]
+*** switch to group : win-[key]
 
 #+begin_src python :exports (when (eq org-export-current-backend 'md) "none")
 
