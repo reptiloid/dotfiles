@@ -54,3 +54,24 @@
 (package! gptel)
 (package! visual-fill-column)
 (package! olivetti)
+
+(package! org-roam-ql)
+
+;; (package! org-roam-ql
+;;  :recipe (:host github :repo "ahmed-shariff/org-roam-ql"
+;;           :files (:defaults (:exclude "org-roam-ql-ql.el"))))
+
+(package! all-the-icons-ibuffer)
+(package! all-the-icons-dired)
+(package! all-the-icons-completion)
+
+(package! org-download)
+
+;; (package! tramp-yadm
+;;   :recipe (:host github :repo "seanfarley/tramp-yadm"))
+
+;; (package! magit-file-icons
+;;   :recipe (:host github :repo "gekoke/magit-file-icons"))
+
+;; (package! ox-chameleon
+;;   :recipe (:host github :repo "tecosaur/ox-chameleon"))

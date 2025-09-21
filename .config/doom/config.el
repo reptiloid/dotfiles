@@ -59,9 +59,10 @@
 ;; my theme conf
 (setq doom-theme 'catppuccin)
 ;; (setq doom-theme 'doom-badger)
+;; (setq doom-theme 'leuven)
 
 (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 14 :weight 'light)
-      doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font" :size 15)
+      doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font" :size 13)
       doom-big-font (font-spec :family "JetBrainsMono Nerd Font" :size 24))
 (after! doom-themes
   (setq doom-themes-enable-bold t
@@ -88,11 +89,18 @@
 ;; derek's config
 (after! org
   (setq org-directory "~/Documents/org/"
-        org-default-notes-file (expand-file-name "notes.org" org-directory)
-        org-ellipsis " ⤵ "
-        org-superstar-headline-bullets-list '("◉" "●" "✸" "✿" "◆")
+        org-attach-directory "~/Documents/org/.attach"
+        org-attach-id-dir "~/Documents/org/.attach"
+        org-id-locations-file "~/Documents/org/.orgids"
+        ;; org-default-notes-file (expand-file-name "notes.org" org-directory)
+        org-default-notes-file "~/Documents/org/Agenda/Inbox.org"
+        ;; org-ellipsis " ⤵ "
+        ;; org-ellipsis "⋮"
+        org-ellipsis "…"
+        org-superstar-headline-bullets-list '("⁖" "‣" "◉" "●" "∘" "⊙"  "❂" "○" "✸")
         ;; org-superstar-itembullet-alist '((?+ . ?➤) (?- . ?✦)) ; changes +/- symbols in item lists
         org-log-done 'time
+        org-agenda-start-with-log-mode t
         org-hide-emphasis-markers t
         ;; ex. of org-link-abbrev-alist in action
         ;; [[arch-wiki:Name_of_Page][Description]]
@@ -105,23 +113,23 @@
         org-todo-keywords        ; This overwrites the default Doom org-todo-keywords
         '((sequence
            "TODO(t)"           ; A task that is ready to be tackled
-           "BLOG(b)"           ; Blog writing assignments
-           "GYM(g)"            ; Things to accomplish at the gym
            "PROJ(p)"           ; A project that contains other tasks
-           "VIDEO(v)"          ; Video assignments
            "WAIT(w)"           ; Something is holding up this task
            "|"                 ; The pipe necessary to separate "active" states and "inactive" states
            "DONE(d)"           ; Task has been completed
-           "CANCELLED(c)" )))) ; Task has been cancelled
+           ))))
 
 (custom-set-faces
- '(org-level-1 ((t (:inherit outline-1 :height 1.4))))
- '(org-level-2 ((t (:inherit outline-2 :height 1.15))))
- '(org-level-3 ((t (:inherit outline-3 :height 1.05))))
+ '(org-level-1 ((t (:inherit outline-1 :height 1.325))))
+ '(org-level-2 ((t (:inherit outline-2 :height 1.05))))
+ '(org-level-3 ((t (:inherit outline-3 :height 1.02 :foreground "#77D0E7"))))
  '(org-level-4 ((t (:inherit outline-4 :height 1.01))))
  '(org-level-5 ((t (:inherit outline-5 :height 1.01))))
+ '(org-level-6 ((t (:inherit outline-6 :height 1.01))))
+ '(org-level-7 ((t (:inherit outline-7 :height 1.01))))
  )
 
+(setq calendar-week-start-day 1)
 
 ;; (set-face-attribute 'org-list-dt nil :foreground "#ff00ff")
 (custom-set-faces! '(org-list-dt :foreground "#F0A015"))
@@ -136,9 +144,13 @@
 (custom-set-faces! '(cursor :background "#F0A015"))
 (setq fancy-splash-image
       (concat doom-private-dir "images/"
-              (nth (random 3) '("emacs.png"
-                                "banner.png"
-                                "doom-emacs-bw-light.svg"))))
+              (nth (random 2) '(
+                                "emacs.svg"
+                                ;; "emacs.png"
+                                ;; "banner.png"
+                                "logo-mini-doom.png"
+                                ;; "doom-emacs-bw-light.svg"
+                                ))))
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -176,15 +188,98 @@
 (map! :n "H" #'evil-first-non-blank)
 (map! :n "L" #'evil-end-of-line)
 
+(map! :n "M-z" #'+vterm/toggle)
+(map! :n "M-q" #'kill-current-buffer)
+(map! :n "M-n" #'next-buffer)
+(map! :n "M-p" #'previous-buffer)
+
 ;; Option 1: Per buffer
 ;; (after! org
 ;;   (add-hook 'org-mode-hook #'org-modern-mode)
 ;;   (add-hook 'org-agenda-finalize-hook #'org-modern-agenda))
-
 ;; org-roam
+
+
+
+(require 'org-download)
+
+;; Drag-and-drop to `dired`
+(add-hook 'dired-mode-hook 'org-download-enable)
+
+(after! org-download
+   (setq org-download-method 'directory))
+
+(after! org
+  (setq-default org-download-image-dir "img/"
+        org-download-heading-lvl nil))
+
+
 (after! org
   (setq org-roam-directory "~/Documents/org/roam/"
-        org-roam-graph-viewer "brave"))
+        org-roam-db-location "~/Documents/org/roam/org-roam.db"
+        org-roam-graph-viewer "brave")
+
+;; (setq-default org-download-image-dir "~/Pictures/doom/downloads")
+
+  (custom-set-faces!
+        '(org-agenda-date :inherit outline-1 :height 1.15)
+        '(org-agenda-date-today :inherit outline-2 :height 1.15)
+        '(org-agenda-date-weekend :inherit outline-1 :height 1.15)
+        '(org-agenda-date-weekend-today :inherit outline-2 :height 1.15)
+        '(org-super-agenda-header :inherit custom-button :weight bold :height 1.05)
+        '(org-link :foreground unspecified))
+
+
+   (setq org-roam-capture-templates
+         '(("d" "default" plain
+             "%?"
+             :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n<t")
+             :unnarrowed t)
+
+            ("b" "book" plain
+             "\n* Source\n\nAuthor: %^{Author}\nTitle: ${title}\nYear: %^{Year}\n\n* Summary\n\n%?"
+             :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+             :unnarrowed t)
+
+            ("n" "notes" plain (file "~/Documents/org/roam/Templates/NoteTemplate.org")
+             :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+             :unnarrowed t)
+        )
+    )
+
+   (setq org-agenda-skip-function-global '(org-agenda-skip-entry-if 'todo 'done))
+
+   (setq org-agenda-span 1
+         org-agenda-start-day "+0d")
+
+    (setq org-agenda-custom-commands
+        '(("p" "Planning"
+                ((tags-todo "+@planning"
+                                ((org-agenda-overriding-header "Planning Tasks")))
+                (tags-todo "-{.*}"
+                                ((org-agenda-overriding-header "Untagged Tasks")))
+                (todo ".*" ((org-agenda-files '("~/Documents/org/Agenda/Inbox.org"))
+                                (org-agenda-overriding-header "Unprocessed Inbox Items")))))
+
+          ("d" "Daily Agenda"
+                ((agenda "" ((org-agenda-span 'day)
+                        (org-deadline-warning-days 7)))
+                (tags-todo "+PRIORITY=\"A\""
+                        ((org-agenda-overriding-header "High Priority Tasks")))))
+
+          ("w" "Weekly Review"
+                ((agenda ""
+                        ((org-agenda-overriding-header "Completed Tasks")
+                        (org-agenda-skip-function '(org-agenda-skip-entry-if 'nottodo 'done))
+                        (org-agenda-span 'week)))
+
+                (agenda ""
+                        ((org-agenda-overriding-header "Unfinished Scheduled Tasks")
+                        (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                        (org-agenda-span 'week)))))))
+)
+
+
 
 (map! :leader
       (:prefix ("n r" . "org-roam")
@@ -213,6 +308,55 @@
 ;;                       (mu4e-compose-signature . "---\nKirill Konovalov"))
 ;;                     t)
 
+;; org agenda
+(setq org-tag-alist
+      '(;;Places
+        ("@home" . ?H)
+        ("@work" . ?W)
+
+        ;; Activities
+        ("@health" . ?h)
+        ("@investing" . ?i)
+        ("@learning" . ?l)
+        ("@youtube" . ?y)
+        ("@planing" . ?n)
+        ("@programming" . ?p)
+        ("@writing" . ?w)
+        ("@shopping" . ?s)
+        ("@message" . ?m)
+        ("@call" . ?a)))
+
+(setq org-agenda-files '("~/Documents/org/Agenda/Personal.org"
+                         "~/Documents/org/Agenda/Projects.org"
+                         "~/Documents/org/Agenda/Work.org"))
+
+(setq olivetti-style 'fancy
+      olivetti-margin-width 120)
+(setq-default olivetti-body-width 120)
+
+;; Function to be run when org-agenda is opened
+(defun org-agenda-open-hook ()
+  "Hook to be run when org-agenda is opened"
+  (olivetti-mode))
+;; Adds hook to org agenda mode, making follow mode active in org agenda
+(add-hook 'org-agenda-mode-hook 'org-agenda-open-hook)
+
+
+;; (setq org-agenda-category-icon-alist
+;;       `(("Work" ,(list (all-the-icons-faicon "graduation-cap" :height 0.8)) nil nil :ascent center)
+;;         ("Inbox" ,(list (all-the-icons-faicon "home" :v-adjust 0.005)) nil nil :ascent center)
+;;         ("Personal" ,(list (all-the-icons-faicon "youtube-play" :height 0.9)) nil nil :ascent center)
+;;         ("Projects" ,(list (all-the-icons-faicon "music" :height 0.9)) nil nil :ascent center)
+;;         ;; ("Stories.s" ,(list (all-the-icons-faicon "book" :height 0.9)) nil nil :ascent center)
+;;         ;; ("Author.p" ,(list (all-the-icons-faicon "pencil" :height 0.9)) nil nil :ascent center)
+;;         ;; ("Gamedev.s" ,(list (all-the-icons-faicon "gamepad" :height 0.9)) nil nil :ascent center)
+;;         ;; ("Knowledge.p" ,(list (all-the-icons-faicon "database" :height 0.8)) nil nil :ascent center)
+;;         ;; ("Personal.p" ,(list (all-the-icons-material "person" :height 0.9)) nil nil :ascent center)
+;; ))
+
+
+;; llms
+
 (use-package! gptel
   :config
   (setq! gptel-api-key "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"))
@@ -236,3 +380,29 @@
   (visual-fill-column-width 125)
   (visual-fill-column-center-text t)
   :hook (org-mode . visual-fill-column-mode))
+
+;; (use-package! tramp-yadm
+;;   :defer t
+;;   :init
+;;   (defun yadm-status ()
+;;     "Invoke magit on the yadm repo"
+;;     (interactive)
+;;     (magit-status "/yadm::~")
+;;     (setq-local magit-git-executable (executable-find "yadm"))
+;;     (setq-local magit-remote-git-executable (executable-find "yadm")))
+
+;;   ;; (after! magit
+;;   ;;   (tramp-yadm-register)
+;;   ;;   (map! :leader :desc "Open yadm status" "g p" #'yadm-status))
+;; )
+;; (add-to-list 'projectile-known-projects "/yadm::~")
+
+;; (use-package! magit-file-icons
+;;   :after magit
+;;   :init
+;;   (magit-file-icons-mode 1))
+
+;; (use-package! ox-chameleon
+;;   :after ox)
+;; (add-to-list 'org-latex-packages-alist '("" "scrextend" nil))
+;; (add-to-list 'org-latex-packages-alist '("" "xcolor" nil))
