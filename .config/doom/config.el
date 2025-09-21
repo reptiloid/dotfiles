@@ -357,23 +357,6 @@
 
 ;; llms
 
-(use-package! gptel
-  :config
-  (setq! gptel-api-key "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"))
-
-
-;; Groq offers an OpenAI compatible API
-(gptel-make-openai "Groq"               ;Any name you want
-  :host "api.groq.com"
-  :endpoint "/openai/v1/chat/completions"
-  :stream t
-  :key "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"
-  :models '(llama-3.1-70b-versatile
-            llama-3.1-8b-instant
-            llama3-70b-8192
-            llama3-8b-8192
-            mixtral-8x7b-32768
-            gemma-7b-it))
 
 (use-package! visual-fill-column
   :custom
