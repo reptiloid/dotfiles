@@ -1,4 +1,8 @@
 from libqtile import bar, layout, widget, hook
+# from qtile_extras import widget
+# from qtile_extras.widget.decorations import RectDecoration
+# from qtile_extras.widget.decorations import PowerLineDecoration
+
 from libqtile.config import (
     Click,
     Drag,
@@ -12,6 +16,8 @@ from libqtile.config import (
 )
 from libqtile.lazy import lazy
 
+from qtile_extras.layout.decorations import ConditionalBorder, GradientBorder
+
 import importlib
 import os
 import platform
@@ -23,13 +29,19 @@ win   = "mod4"
 shift = "shift"
 enter = "Return"
 
+betterlockscreen = "betterlockscreen -l"
 st_terminal = "st"
 kitty_terminal = "/home/rep/.local/kitty.app/bin/kitty"
+qutebrowser = "/home/rep/.local/bin/qutebrowser"
+qtbrowser_launcher = "/home/rep/.local/bin/qtbrowser_launcher"
 # rofi = "/home/rep/.config/rofi/launchers/type-1/launcher.sh"
 rofi = "rofi -show drun"
 shutdown = "/home/rep/.config/rofi/powermenu/type-2/powermenu.sh"
 change_bg = "feh --bg-fill -z /home/rep/Pictures/walls"
-# change_bg = "bash /home/rep/.local/debinstall/wallpaper.sh select"
+wallpaper_select = "bash /home/rep/.local/debinstall/wallpaper.sh select"
+
+def go_to_group(qtile, index):
+    qtile.current_group.use_layout(index)
 
 keys = [
     # Switch between windows
@@ -37,10 +49,11 @@ keys = [
     Key([win], "h", lazy.next_screen(), desc="Next monitor"),
     Key([win], "g", lazy.to_screen(1), desc="Next monitor"),
     Key([win], "a", lazy.to_screen(0), desc="Next monitor"),
-    Key([win], "l", lazy.layout.right(), desc="Move focus to right"),
+    # Key([win], "l", lazy.layout.right(), desc="Move focus to right"),
     Key([win], "j", lazy.layout.down(), desc="Move focus down"),
     Key([win], "k", lazy.layout.up(), desc="Move focus up"),
     Key([win], "space", lazy.layout.next(), desc="Move window focus to other window"),
+    Key([alt], "Tab", lazy.layout.next(), desc="Move window focus to other window"),
 
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
@@ -65,12 +78,16 @@ keys = [
     Key([win], "c", lazy.spawn(rofi), desc="Rofi Launcher"),
     # Key([ctrl], "~", lazy.spawn(rofi), desc="Rofi Launcher"),
     Key([win], "n", lazy.spawn(change_bg), desc="Change Bg Wallpaper"),
+    Key([win, shift], "n", lazy.spawn(wallpaper_select), desc="Change Bg Wallpaper"),
     # Key([win], "p", lazy.spawn(change_bg_unsplash), desc="Wallpaper Unsplash"),
     # Key([win], "s", lazy.spawn("sxpape --set"), desc="Select Bg Wallpaper"),
     Key([win], "0", lazy.spawn(shutdown), desc="Shutdown Menu"),
     Key([alt], "f4", lazy.spawn(shutdown), desc="Shutdown Menu"),
-    Key([win], enter, lazy.spawn(st_terminal), desc="Launch st terminal"),
-    Key([win], "t", lazy.spawn(kitty_terminal), desc="Kitty"),
+    # Key([win], enter, lazy.spawn(st_terminal), desc="Launch st terminal"),
+    Key([win], enter, lazy.spawn(kitty_terminal), desc="Launch kitty terminal"),
+    Key([alt], "space", lazy.widget["keyboardlayout"].next_keyboard(), desc="Next keyboard layout"),
+    # Key([win], "е", lazy.widget["keyboardlayout"].next_keyboard(), desc="Next keyboard layout"),
+    Key([win], "l", lazy.spawn(betterlockscreen), desc="Lock the Screen"),
 
     # Toggle between different layouts as defined below
     Key([win], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
@@ -78,7 +95,18 @@ keys = [
     Key([win, ctrl], "r", lazy.reload_config(), desc="Reload the config"),
     Key([win, ctrl], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([win], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
-    Key([win], "b", lazy.hide_show_bar(position="bottom")),
+    Key([win], "p", lazy.hide_show_bar(position="bottom")),
+    Key([win], "f", lazy.function(go_to_group, 0)),
+    Key([win], "m", lazy.function(go_to_group, 1)),
+    Key([win], "t", lazy.function(go_to_group, 2)),
+
+    # Qt Browser
+    KeyChord([win], "b", [
+        Key([], "q", lazy.spawn(qutebrowser)),
+        Key([], "s", lazy.spawn(qtbrowser_launcher)),
+        Key([], "f", lazy.spawn("floorp")),
+        Key([], "b", lazy.spawn("brave")),
+    ])
 ]
 
 groups = [
@@ -86,25 +114,26 @@ groups = [
         "",
         layout="max",
         matches=[
-            Match(wm_class=["thunderbird-default", "Rofi", "librewolf", "chromium", "brave", "floorp"])
+            Match(wm_class=["thunderbird-default", "rofi", "librewolf", "chromium", "brave", "floorp"])
         ],
     ),
     Group(
         "",
         layout="monadtall",
-        matches=[Match(wm_class=["virt-manager", "nomacs", "ristretto", "nitrogen"])],
+        matches=[Match(wm_class=["virt-manager", "emacs", "obsidian", "pcmanfm"]),
+                 Match(title="FAF ICE adapter - Debugger - Build: SNAPSHOT")],
     ),
     Group(
         "",
         layout="max",
-        matches=[Match(wm_class=["qpdfview", "thunar", "nemo", "caja", "pcmanfm"])],
+        matches=[Match(wm_class=["qpdfview", "thunar", "nemo", "caja"])],
     ),
     Group(
         "󱂬",
         layout="max",
         matches=[
             Match(wm_class=["spotify", "pragha", "clementine", "deadbeef", "audacious"]),
-            Match(title=["VLC media player"]),
+            # Match(title=["VLC media player"]),
         ],
     ),
     # Group("󰎞", layout="tile"),
@@ -125,11 +154,11 @@ groups.append(
             DropDown(
                 "st term",
                 "st",
-                x=0.,
+                x=0.005,
                 y=0.,
-                opacity=1,
-                width=1.,
-                height=0.425,
+                opacity=.88,
+                width=.99,
+                height=0.475,
                 on_focus_lost_hide=False,
             ),
         ],
@@ -143,19 +172,34 @@ keys.extend(
 )
 
 layouts = [
-    layout.Columns(
-        border_focus_stack=["#d75f5f", "#8f3d3d"],
-        border_width=4,
-        margin=[15, 15, 15, 15],
-    ),
+    # layout.Columns(
+    #     border_focus_stack=["#d75f5f", "#8f3d3d"],
+    #     border_width=4,
+    #     margin=[15, 15, 15, 15],
+    # ),
     layout.Max(),
+    layout.MonadTall(
+        border_focus=ConditionalBorder(
+                matches=[
+                        (Match(wm_class="emacs"), GradientBorder(colours=["e85e00", "E0CA3C", "4a874a", "F34213"])),
+                        (Match(wm_class="qutebrowser"), GradientBorder(colours=["e85e00", "EFEA5A", "4a874a"])),
+                        (Match(wm_class="kitty"), GradientBorder(colours=["8E78BA", "e80000", "F1E7A7", "3FDEC9"])),
+                        # (Match(wm_class="firefox"), "f0f"),
+                ],
+                fallback="8f3d3d"),
+                border_width=5,
+                margin=15,
+    ),
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
     # layout.Matrix(),
     # layout.MonadTall(margin=5),
     # layout.MonadWide(),
     # layout.RatioTile(),
-    # layout.Tile(),
+    layout.Tile(
+        border_focus="#8f3d3d",
+        border_width=2,
+    ),
     # layout.TreeTab(),
     # layout.VerticalTile(),
     # layout.Zoomy(),
@@ -163,7 +207,7 @@ layouts = [
 
 widget_defaults = dict(
     font="JetBrainsMono Nerd Font",
-    fontsize=12,
+    fontsize=11,
     padding=3,
 )
 extension_defaults = widget_defaults.copy()
@@ -173,46 +217,25 @@ screens = [
     Screen(
         bottom=bar.Bar(
             [
-                # widget.CurrentLayout(),
                 widget.GroupBox(
                     fontsize=13,
                     margin_x=14,
-                    margin_y=4,
                     padding_x=11,
-                    padding_y=2,
-                    borderwidth=2,
                     rounded=True,
                     spacing=2,
                     highlight_color="#611C35",
                     highlight_method="line",
-                    # visible_groups=["", "", "",],
                 ),
-                # widget.TextBox(" 🔥 ", name="default", foreground="#d75f5f"),
-                widget.TextBox("    ", name="default", foreground="#d75f5f"),
-                widget.Prompt(),
                 widget.WindowName(),
-                widget.Chord(
-                    chords_colors={
-                        "launch": ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
-                ),
-                # widget.TextBox("default config", name="default"),
-                # widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
-                # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
-                # widget.StatusNotifier(),
+                widget.Chord(),
                 widget.Systray(),
-                widget.Clock(format="%Y-%m-%d, %A [ %H:%M ]  "),
-                # widget.QuickExit(),
+                widget.KeyboardLayout(configured_keyboards=['us', 'ru'], fmt="[ {} ]", padding=11),
+                widget.CPUGraph(),
+                widget.NetGraph(graph_color="#e23456"),
+                widget.Clock(format="%Y-%m-%d, %A [ %H:%M ]", padding=11),
             ],
-            24,
-            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
-            # border_color=[
-                # "ff00ff",
-                # "000000",
-                # "ff00ff",
-                # "000000",
-            # ],  # Borders are magenta
+            size=20,
+            # margin=[8,12,8,12],
         ),
     ),
     Screen()
@@ -251,6 +274,7 @@ floating_layout = layout.Floating(
         Match(wm_class="org.cryptomator.launcher.Cryptomator$MainApp"),
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
+        Match(title="FAF ICE adapter - Debugger - Build: SNAPSHOT"), # faf
     ],
 )
 
@@ -269,5 +293,5 @@ wmname = "LG3D"
 
 @hook.subscribe.startup_once
 def autostart():
-    script = os.path.expanduser("~/.config/qtile/scripts/script.sh")
+    script = os.path.expanduser("~/.config/qtile/scripts/autostart.sh")
     subprocess.call([script])
