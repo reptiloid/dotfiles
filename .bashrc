@@ -142,8 +142,8 @@ alias lr='ls -lRh' # recursive ls
 alias lm='ls -alh |more' # pipe through 'more'
 alias lw='ls -xAh' # wide listing format
 # alias lt='ls -ltrh' # sort by date
-alias lt='exa --tree --group-directories-first --icons --git-ignore'
-alias ll='exa -la --group-directories-first --icons --git-ignore'
+alias lt='eza --tree --group-directories-first --icons --git-ignore'
+alias ll='eza -la --group-directories-first --icons --git-ignore'
 alias labc='ls -lap' #alphabetical sort
 # alias lf="ls -l | egrep -v '^d'" # files only
 alias ldir="ls -l | egrep '^d'" # directories only
@@ -193,8 +193,7 @@ alias logs="sudo find /var/log -type f -exec file {} \; | grep 'text' | cut -d' 
 
 
 alias yy="yazi"
-alias ze="zellij"
-alias zw="zellij attach vim-work"
+alias ff="fastfetch"
 
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
@@ -567,4 +566,4 @@ export PATH=$BUN_INSTALL/bin:$PATH
 [[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
 
 eval "$(zoxide init bash)"
-source ~/.local/share/blesh/ble.sh
+# source ~/.local/share/blesh/ble.sh
