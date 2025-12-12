@@ -31,7 +31,9 @@ enter = "Return"
 
 betterlockscreen = "betterlockscreen -l"
 st_terminal = "st"
-kitty_terminal = "/home/rep/.local/kitty.app/bin/kitty"
+myEmacs = "emacsclient -c -a 'emacs' " # The space at the end is IMPORTANT!
+kitty_terminal = "/usr/bin/kitty"
+# kitty_terminal = "/usr/bin/kitty fish"
 qutebrowser = "/home/rep/.local/bin/qutebrowser"
 qtbrowser_launcher = "/home/rep/.local/bin/qtbrowser_launcher"
 # rofi = "/home/rep/.config/rofi/launchers/type-1/launcher.sh"
@@ -53,7 +55,7 @@ keys = [
     Key([win], "j", lazy.layout.down(), desc="Move focus down"),
     Key([win], "k", lazy.layout.up(), desc="Move focus up"),
     Key([win], "space", lazy.layout.next(), desc="Move window focus to other window"),
-    Key([alt], "Tab", lazy.layout.next(), desc="Move window focus to other window"),
+    # Key([alt], "Tab", lazy.layout.next(), desc="Move window focus to other window"),
 
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
@@ -99,6 +101,17 @@ keys = [
     Key([win], "f", lazy.function(go_to_group, 0)),
     Key([win], "m", lazy.function(go_to_group, 1)),
     Key([win], "t", lazy.function(go_to_group, 2)),
+    
+    # Emacs programs launched using the key chord SUPER+e followed by 'key'
+    KeyChord([win],"e", [
+        Key([], "e", lazy.spawn(myEmacs), desc='Emacs Dashboard'),
+        Key([], "d", lazy.spawn(myEmacs + "--eval '(dired nil)'"), desc='Emacs Dired'),
+        Key([], "s", lazy.spawn(myEmacs + "--eval '(eshell)'"), desc='Emacs Eshell'),
+        Key([], "v", lazy.spawn(myEmacs + "--eval '(vterm)'"), desc='Emacs Vterm'),
+        Key([], "k", lazy.spawn("killall emacs"),
+                      lazy.spawn("/usr/local/bin/emacs --daemon"),
+                      desc='Kill/restart the Emacs daemon')
+    ]),
 
     # Qt Browser
     KeyChord([win], "b", [
