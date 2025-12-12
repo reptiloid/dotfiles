@@ -1,0 +1,39 @@
+unbind '
+bind '13 tabopen localhost:1313
+
+bind 'a tabopen https://alenka.capital
+
+bind 'A tabopen https://github.com/bayandin/awesome-awesomeness
+
+bind 'd tabopen https://ytdlp.online/
+
+bind 'e tabopen https://www.reddit.com/r/emacs/
+bind 'f js tri.excmds.tabopen(`https://fakespot.com/analyze?url=${document.location.href}`)
+
+bind 'g tabopen https://gitlab.com/
+
+bind 'H tabopen https://news.ycombinator.com/news
+bind 'n tabopen https://www.reddit.com/r/neovim
+bind 'p tabopen https://privacytools.io
+bind 'P tabopen https://prism-break.org
+bind 'q tabopen https://quora.com/
+
+bind 'ss tabopen https://solo.nabiraem.ru/
+bind 'sd tabopen https://solo.nabiraem.ru/profile/stat/by/date/?course=eng
+bind 'sr tabopen https://solo.nabiraem.ru/study/rating/common
+
+bind 'S tabopen https://cr36.skladchik.org/
+bind 't tabopen https://www.tradingview.com/chart/vKNYEFCa/
+
+bind 'W js tri.excmds.tabopen(`https://web.archive.org/web/*/${document.location.href}`)
+
+bind 'yy tabopen https://youtube.com/
+bind 'yh tabopen https://youtube.com/feed/history
+bind 'yw tabopen https://www.youtube.com/playlist?list=WL
+
+" to get to login page (e.g. airport/hotel)
+bind 'z jsb tri.native.run("ip route | awk '/default/ {print $3}'").then(result => tri.excmds.tabopen(result.content))
+
+" Local Variables:
+" mode: vimrc
+" End:

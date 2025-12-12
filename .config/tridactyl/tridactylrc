@@ -1,0 +1,85 @@
+" delete browser-stored config
+" sanitise tridactyllocal tridactylsync
+
+set modeindicator true
+
+" Don't run Tridactyl on some web sites because it doesn't work well, or
+" because the web site has its own keybindings.
+autocmd DocStart mail.google.com mode ignore
+autocmd DocStart solo.nabiraem.ru mode ignore
+
+
+" Sometimes the status bar in the bottom left corner overlaps the Tridactyl
+" command line, so set an option to move the status bar to the right.
+guiset_quiet hoverlink right
+
+
+bind <A-x> fillcmdline_notrail
+
+
+" But also support Tridactyl search too.
+bind / fillcmdline find
+bind ? fillcmdline find -?
+bind n findnext 1
+bind N findnext -1
+
+
+bind B fillcmdline bmarks
+bind s fillcmdline tabopen y
+
+bind --mode=hint <C-g> hint.reset
+bind --mode=ex <C-g> ex.hide_and_clear
+bind --mode=insert <C-g> composite unfocus ; mode normal
+bind --mode=visual <C-g> composite unfocus ; mode normal
+bind <C-g> composite nohlsearch ; ex.hide_and_clear
+
+" bind --mode=insert <C-w> text.kill_word
+" bind --mode=ex <C-w> text.kill_word
+
+
+bind --mode=insert <C-f> text.forward_char
+bind --mode=insert <C-b> text.backward_char
+bind --mode=insert <C-e> text.end_of_line
+
+bind --mode=insert <C-j> !s xdotool key Down
+bind --mode=insert <C-k> !s xdotool key Up
+
+
+bind --mode=ex <C-f> text.forward_char 1
+bind --mode=ex <C-b> text.backward_char
+
+bind --mode=ex <A-n> ex.next_history
+bind --mode=ex <A-p> ex.prev_history
+
+bind --mode=ex <C-n> ex.prev_completion
+bind --mode=ex <C-p> ex.next_completion
+bind --mode=ex <A-k> ex.prev_completion
+bind --mode=ex <A-j> ex.next_completion
+bind --mode=ex <A-/> ex.insert_completion
+bind --mode=ex <S-Enter> ex.insert_completion
+
+bind --mode=hint <C-b> hint.focusPreviousHint
+bind --mode=hint <C-f> hint.focusNextHint
+bind --mode=hint Y hint -y
+
+bind --mode=video i fillcmdline video_goto
+
+
+bind --mode=ignore <A-i> mode normal
+bind --mode=normal <A-i> mode ignore
+
+
+
+bindurl ^https://duckduckgo.com f hint -Jc [data-testid="result-title-a"]
+bindurl ^https://duckduckgo.com F hint -Jbc [data-testid="result-title-a"]
+
+bindurl ^https://youtube.com f hint -Jc [class*="style-scope"]
+
+
+
+
+" Quickmarks
+source ~/.config/tridactyl/quickmarks
+
+" Search Engines
+source ~/.config/tridactyl/searchengines
