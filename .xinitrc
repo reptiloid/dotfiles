@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 # VM Screen Config
-xrandr --output Virtual-1 --mode 1920x1080 &
+# xrandr --output Virtual-1 --mode 1920x1080 &
 
 xrdb merge ~/.Xresources &
 
