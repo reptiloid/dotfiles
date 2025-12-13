@@ -97,7 +97,11 @@
         ;; org-ellipsis " ⤵ "
         ;; org-ellipsis "⋮"
         org-ellipsis "…"
-        org-superstar-headline-bullets-list '("⁖" "‣" "◉" "●" "∘" "⊙"  "❂" "○" "✸")
+        org-modern-hide-stars nil
+        ;; org-modern-star '("⁖" "‣" "◉" "●" "∘" "⊙"  "❂" "○" "✸")
+        ;; org-modern-star "⁖◉○◈◇✳" ;;'["" "" "" "" "" "" "" "" "" ""]
+        org-modern-star "         "
+        ;; org-modern-replace-stars "⁖◉○◈◇✳"
         ;; org-superstar-itembullet-alist '((?+ . ?➤) (?- . ?✦)) ; changes +/- symbols in item lists
         org-log-done 'time
         org-agenda-start-with-log-mode t
@@ -127,6 +131,7 @@
  '(org-level-5 ((t (:inherit outline-5 :height 1.01))))
  '(org-level-6 ((t (:inherit outline-6 :height 1.01))))
  '(org-level-7 ((t (:inherit outline-7 :height 1.01))))
+ '(org-document-title ((t (:inherit outline-7 :bold t :height 1.8))))
  )
 
 (setq calendar-week-start-day 1)
