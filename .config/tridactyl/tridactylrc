@@ -7,6 +7,7 @@ set modeindicator true
 " because the web site has its own keybindings.
 autocmd DocStart mail.google.com mode ignore
 autocmd DocStart solo.nabiraem.ru mode ignore
+autocmd DocStart monkeytype.com mode ignore
 
 
 " Sometimes the status bar in the bottom left corner overlaps the Tridactyl

@@ -21,6 +21,7 @@ bind 'q tabopen https://quora.com/
 bind 'ss tabopen https://solo.nabiraem.ru/
 bind 'sd tabopen https://solo.nabiraem.ru/profile/stat/by/date/?course=eng
 bind 'sr tabopen https://solo.nabiraem.ru/study/rating/common
+bind 'sm tabopen https://monkeytype.com/
 
 bind 'S tabopen https://cr36.skladchik.org/
 bind 't tabopen https://www.tradingview.com/chart/vKNYEFCa/
