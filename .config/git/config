@@ -1,0 +1,8 @@
+[user]
+	name = Kirill
+	email = 2spybot@gmail.com
+[alias]
+	sta = status
+	st = status -s
+	lol = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	lg = log --oneline --graph --all --decorate
