@@ -1,5 +1,29 @@
-[plugin]
-deps = []
+[[plugin.deps]]
+use = "NoponyAsked/sxiv"
+rev = "525a842"
+hash = "ca5c2ad5cccb94f93f3bf8eb2e9a1421"
 
-[flavor]
-deps = [{ use = "yazi-rs/flavors:catppuccin-macchiato", rev = "8458d25" }, { use = "sanjinso/monokai-vibrant", rev = "8b68223" }]
+[[plugin.deps]]
+use = "imsi32/yatline"
+rev = "88bd1c5"
+hash = "981acbe9b758b1af3a8154c932bb936d"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:toggle-pane"
+rev = "03cdd4b"
+hash = "8a7c58225816a163a6e8730c0adafbc8"
+
+[[flavor.deps]]
+use = "yazi-rs/flavors:catppuccin-macchiato"
+rev = "4a1802a"
+hash = "b069dba45e199684b16fa12d385642ed"
+
+[[flavor.deps]]
+use = "sanjinso/monokai-vibrant"
+rev = "8b68223"
+hash = "7cf995e2185a45b5141ce807b7eced60"
+
+[[flavor.deps]]
+use = "yazi-rs/flavors:dracula"
+rev = "9276ffa"
+hash = "5d16bf24ca0980168814fc1abd307c07"
