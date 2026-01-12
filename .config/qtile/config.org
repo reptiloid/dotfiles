@@ -8,8 +8,7 @@ A list of available commands that can be bound to keys can be found
 at https://docs.qtile.org/en/latest/manual/config/lazy.html
 
 * Imports
-#+begin_src python :exports (when (eq org-export-current-backend 'md) "none")
-
+#+begin_src python
 from libqtile import bar, layout, widget, hook
 # from qtile_extras import widget
 # from qtile_extras.widget.decorations import RectDecoration
@@ -47,7 +46,7 @@ enter = "Return"
 
 #+end_src
 ** programs
-#+begin_src python :exports (when (eq org-export-current-backend 'md) "none")
+#+begin_src python
 betterlockscreen = "betterlockscreen -l"
 st_terminal = "st"
 myEmacs = "emacsclient -c -a 'emacs' " # The space at the end is IMPORTANT!
@@ -82,10 +81,9 @@ change_bg = "feh --bg-fill -z /home/rep/Pictures/walls"
 
 
 
-#+begin_src python :exports (when (eq org-export-current-backend 'md) "none")
+#+begin_src python
 keys = [
     Key([win], "c", lazy.spawn(rofi), desc="Rofi Launcher"),
-    # Key([win], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     Key([win], "n", lazy.spawn(change_bg), desc="Change Bg Wallpaper"),
     
     Key([win], "0", lazy.spawn(shutdown), desc="Shutdown Menu"),
@@ -102,7 +100,7 @@ keys = [
 #+end_src
 
 ** Move Focus Between Screens
-#+begin_src python :exports (when (eq org-export-current-backend 'md) "none")
+#+begin_src python
 keys.extend([
     Key([win], "h", lazy.next_screen(), desc="Next monitor"),
     Key([win], "g", lazy.to_screen(1), desc="Monitor 2"),
@@ -111,8 +109,7 @@ keys.extend([
 #+end_src
 
 ** Layout Manipulation
-#+begin_src python :exports (when (eq org-export-current-backend 'md) "none")
-
+#+begin_src python
 def go_to_group(qtile, index):
     qtile.current_group.use_layout(index)
     
@@ -135,7 +132,7 @@ keys.extend([
 | win-spc     | focus next window   |
 | win-tab     | next layout         |
 
-#+begin_src python :exports (when (eq org-export-current-backend 'md) "none")
+#+begin_src python
 keys.extend(
     [
         Key([win, shift], "w", lazy.window.kill(), desc="Kill focused window"),
@@ -165,23 +162,21 @@ keys.extend(
 ** Emacs Keychords
 Emacs programs launched using the key chord SUPER+e followed by 'key'
 
-#+begin_src python :exports (when (eq org-export-current-backend 'md) "none")
+#+begin_src python
 keys.append(
     KeyChord([win],"e", [
         Key([], "e", lazy.spawn(myEmacs), desc='Emacs Dashboard'),
         Key([], "d", lazy.spawn(myEmacs + "--eval '(dired nil)'"), desc='Emacs Dired'),
-        # Key([], "s", lazy.spawn(myEmacs + "--eval '(eshell)'"), desc='Emacs Eshell'),
-        # Key([], "v", lazy.spawn(myEmacs + "--eval '(vterm)'"), desc='Emacs Vterm'),
         Key([], "k", lazy.spawn("killall emacs"),
-                        lazy.spawn("/usr/local/bin/emacs --daemon"),
-                        desc='Kill/restart the Emacs daemon')
+                     lazy.spawn("/usr/local/bin/emacs --daemon"),
+                     desc='Kill/restart the Emacs daemon')
     ])
 
 )
 #+end_src
 
 ** Browsers Launcher
-#+begin_src python :exports (when (eq org-export-current-backend 'md) "none")
+#+begin_src python
 keys.append(
     KeyChord([win], "b", [
         # Key([], "q", lazy.spawn(qutebrowser)),
@@ -196,7 +191,7 @@ keys.append(
 ** DM scripts Keychords
 Dmenu/rofi scripts launched using the key chord SUPER+p followed by 'key'
 
-#+begin_src python :exports (when (eq org-export-current-backend 'md) "none")
+#+begin_src python
 keys.append(
     KeyChord([win], "p", [
         Key([], "h", lazy.spawn("dm-hub -r"), desc='List all dmscripts'),
@@ -222,7 +217,7 @@ keys.append(
 
 * Groups
 
-#+begin_src python :exports (when (eq org-export-current-backend 'md) "none")
+#+begin_src python
 groups = [
     Group(
         "",
@@ -270,7 +265,7 @@ switch to group : win-[key]
 | o   |     4 |
 
 
-#+begin_src python :exports (when (eq org-export-current-backend 'md) "none")
+#+begin_src python
 for k, group in zip(["y", "u", "i", "o", ], groups):
     keys.extend(
         [
@@ -284,8 +279,7 @@ for k, group in zip(["y", "u", "i", "o", ], groups):
 * Layouts
 Try more layouts by unleashing below layouts.
 
-#+begin_src python :exports (when (eq org-export-current-backend 'md) "none")
-
+#+begin_src python
 layouts = [
     # layout.Columns(
     #     border_focus_stack=["#d75f5f", "#8f3d3d"],
@@ -297,7 +291,7 @@ layouts = [
         border_focus=ConditionalBorder(matches=[
             (Match(wm_class="emacs"), GradientBorder(colours=["e85e00", "E0CA3C", "4a874a", "F34213", "1974e0"])),
             (Match(wm_class="qutebrowser"), GradientBorder(colours=["e85e00", "EFEA5A", "4a874a"])),
-            (Match(wm_class="kitty"), GradientBorder(colours=["8E78BA", "e80000", "F1E7A7", "3FDEC9"])),
+            (Match(wm_class="kitty"), GradientBorder(colours=["8E78BA", "e80000", "F1E7A7", "3FDEC9", "d89a1f"])),
             (Match(wm_class="floorp"), GradientBorder(colours=["9c305c", "2ad0ea", "19e048", "e01996", "1974e0"])),
             # (Match(wm_class="firefox"), "f0f"),
         ], fallback="8f3d3d"),
@@ -322,7 +316,7 @@ layouts = [
 
 * QtileBar and Widgets
 
-#+begin_src python :exports (when (eq org-export-current-backend 'md) "none")
+#+begin_src python
 
 widget_defaults = dict(
     font="JetBrainsMono Nerd Font",
@@ -385,7 +379,7 @@ mouse = [
 
 * Options
 
-#+begin_src python :exports (when (eq org-export-current-backend 'md) "none")
+#+begin_src python
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
@@ -398,7 +392,7 @@ cursor_warp = False
 
 ** floating
 
-#+begin_src python :exports (when (eq org-export-current-backend 'md) "none")
+#+begin_src python
 floating_layout = layout.Floating(
     border_focus="#A6A867",
     border_normal="#262729",

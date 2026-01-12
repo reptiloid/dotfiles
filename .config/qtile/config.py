@@ -43,7 +43,6 @@ change_bg = "feh --bg-fill -z /home/rep/Pictures/walls"
 
 keys = [
     Key([win], "c", lazy.spawn(rofi), desc="Rofi Launcher"),
-    # Key([win], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     Key([win], "n", lazy.spawn(change_bg), desc="Change Bg Wallpaper"),
     
     Key([win], "0", lazy.spawn(shutdown), desc="Shutdown Menu"),
@@ -103,11 +102,9 @@ keys.append(
     KeyChord([win],"e", [
         Key([], "e", lazy.spawn(myEmacs), desc='Emacs Dashboard'),
         Key([], "d", lazy.spawn(myEmacs + "--eval '(dired nil)'"), desc='Emacs Dired'),
-        # Key([], "s", lazy.spawn(myEmacs + "--eval '(eshell)'"), desc='Emacs Eshell'),
-        # Key([], "v", lazy.spawn(myEmacs + "--eval '(vterm)'"), desc='Emacs Vterm'),
         Key([], "k", lazy.spawn("killall emacs"),
-                        lazy.spawn("/usr/local/bin/emacs --daemon"),
-                        desc='Kill/restart the Emacs daemon')
+                     lazy.spawn("/usr/local/bin/emacs --daemon"),
+                     desc='Kill/restart the Emacs daemon')
     ])
 
 )
@@ -196,7 +193,7 @@ layouts = [
         border_focus=ConditionalBorder(matches=[
             (Match(wm_class="emacs"), GradientBorder(colours=["e85e00", "E0CA3C", "4a874a", "F34213", "1974e0"])),
             (Match(wm_class="qutebrowser"), GradientBorder(colours=["e85e00", "EFEA5A", "4a874a"])),
-            (Match(wm_class="kitty"), GradientBorder(colours=["8E78BA", "e80000", "F1E7A7", "3FDEC9"])),
+            (Match(wm_class="kitty"), GradientBorder(colours=["8E78BA", "e80000", "F1E7A7", "3FDEC9", "d89a1f"])),
             (Match(wm_class="floorp"), GradientBorder(colours=["9c305c", "2ad0ea", "19e048", "e01996", "1974e0"])),
             # (Match(wm_class="firefox"), "f0f"),
         ], fallback="8f3d3d"),
