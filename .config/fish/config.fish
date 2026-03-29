@@ -16,16 +16,36 @@ alias ll='eza -la --group-directories-first --icons'
 alias yy='yazi'
 alias ff='fastfetch --raw /home/rep/Pictures/image.bin --logo-width 15'
 
+alias myip="curl 'https://api.ipify.org?format=json'"
+alias mygeo="curl 'https://ipinfo.io/json'"
+
+alias rclone_all='func_rclone $buku_db_path $pwd_path $zoxide_db'
+
 # alias pbpaste='xclip -selection clipboard -o'
+# 
 
 # alias wgup="sudo wg-quick up wg0"
 # alias wgdn="sudo wg-quick down wg0"
 
-alias gdriv='rclone copy "/home/rep/Documents/DATA_TEMP/other/сбор данных/pwd.kdbx" gdrive:backup'
-alias dropb='rclone copy "/home/rep/Documents/DATA_TEMP/other/сбор данных/pwd.kdbx" remote:backup'
+
+set zoxide_db "/home/rep/.local/share/zoxide/db.zo"
+set buku_db_path "/home/rep/.local/share/buku/bookmarks.db"
+set pwd_path "/home/rep/Documents/pwd/pwd.kdbx"
+
+function func_rclone -d "Backup files to dropbox and gdirve"
+    for p in $argv
+      echo "copy $p to GDRIVE"
+      rclone copy $p gdrive:backup -v
+      echo "--------------------------"
+      echo "--------------------------"
+      echo "copy $p to DROPBOX"
+      rclone copy $p dropbox:backup -v
+    end
+end
 
 
-
+# alias gdriv='rclone copy $pwd_path gdrive:backup'
+# alias dropb='rclone copy $pwd_path dropbox:backup'
 
 function fish_greeting
     # random choice "Hello!" "Hi" "G'day" "Howdy"
