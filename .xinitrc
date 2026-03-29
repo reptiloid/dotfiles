@@ -7,3 +7,4 @@ xrdb merge ~/.Xresources &
 
 # Start WM 
 exec qtile start
+# exec xtrace qtile start >> ~/.qtile.log
