@@ -91,7 +91,7 @@
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
 
-(add-to-list 'default-frame-alist '(alpha 93 83))
+(add-to-list 'default-frame-alist '(alpha 97 83))
 
 (let ((alternatives '(
                       "emacs.svg"
@@ -306,3 +306,14 @@
           org-latex-pdf-process '("tectonic -X compile --outdir=%o -Z shell-escape -Z continue-on-errors %f"))
 
 )
+
+(setq gptel-model   'openai/gpt-oss-120b
+      gptel-backend
+      (gptel-make-openai "Groq"
+        :host "api.groq.com"
+        :endpoint "/openai/v1/chat/completions"
+        :stream t
+        :key (auth-source-pick-first-password :host "api.groq.com")
+        :models '(groq/compound
+                  llama-3.3-70b-versatile
+                  qwen/qwen3-32b)))

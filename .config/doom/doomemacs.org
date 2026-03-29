@@ -411,7 +411,7 @@ Enable showing a word count in the modeline. This is only shown for the modes li
 
 *** Window Alpha
 #+begin_src emacs-lisp
-(add-to-list 'default-frame-alist '(alpha 93 83))
+(add-to-list 'default-frame-alist '(alpha 97 83))
 #+end_src
 
 *** DashBoard Splash Image
@@ -739,6 +739,20 @@ Configure attachments to be stored together with their Org document.
 * Other tools
 ** Miscellaneous packages
 *** Gptel
+#+begin_src emacs-lisp
+(setq gptel-model   'openai/gpt-oss-120b
+      gptel-backend
+      (gptel-make-openai "Groq"
+        :host "api.groq.com"
+        :endpoint "/openai/v1/chat/completions"
+        :stream t
+        :key (auth-source-pick-first-password :host "api.groq.com")
+        :models '(groq/compound
+                  llama-3.3-70b-versatile
+                  qwen/qwen3-32b)))
+
+#+end_src
+
 #+begin_src emacs-lisp :tangle packages.el
 (package! gptel)
 #+end_src
