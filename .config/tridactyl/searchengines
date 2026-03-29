@@ -32,7 +32,9 @@ set searchurls.y https://www.youtube.com/results?search_query=%s
 set searchurls.wayback https://web.archive.org/web/*/%s
 set searchurls.zerochan https://www.zerochan.net/%s
 
-set searchengine d
+set searchurls.fg https://4get.joygnu.org/web?s=%s&scraper=ddg&nsfw=yes
+
+set searchengine fg
 
 " Local Variables:
 " mode: vimrc
