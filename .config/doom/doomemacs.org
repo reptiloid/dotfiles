@@ -366,6 +366,13 @@ Disable exit confirmation.
 (setq confirm-kill-emacs nil)
 #+end_src
 
+GPG
+#+begin_src emacs-lisp
+(setenv "GPG_AGENT_INFO" nil)
+(setq epa-pinentry-mode 'loopback)
+(setq-default vterm-shell (executable-find "fish"))
+#+end_src
+
 ** Visuals
 *** Modeline
 #+begin_src emacs-lisp
@@ -418,9 +425,10 @@ Enable showing a word count in the modeline. This is only shown for the modes li
 #+begin_src emacs-lisp
 (let ((alternatives '(
                       "emacs.svg"
-                      "doom-vapourwave.png"
-                      "doomEmacsDracula.svg"
-                      "logo-mini-doom.png"
+                      "skull.png"
+                      ;; "emacs.png"
+                      "demon1.png"
+                      "demon2.png"
                       )))
   (setq fancy-splash-image
         (concat doom-user-dir "images/"
@@ -618,6 +626,11 @@ Configure attachments to be stored together with their Org document.
                 "%?"
                 :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
                 :unnarrowed t)
+              
+            ("e" "enc" plain
+                "%?"
+                :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org.gpg" "#+title: ${title}\n")
+                :unnarrowed t)
 
             ("b" "book" plain
                 "\n* Source\n\nAuthor: %^{Author}\nTitle: ${title}\nYear: %^{Year}\n\n* Summary\n\n%?"
@@ -740,12 +753,12 @@ Configure attachments to be stored together with their Org document.
 ** Miscellaneous packages
 *** Gptel
 #+begin_src emacs-lisp
-(setq gptel-model   'openai/gpt-oss-120b
+(setq gptel-model   'llama-3.3-70b-versatile
       gptel-backend
       (gptel-make-openai "Groq"
         :host "api.groq.com"
         :endpoint "/openai/v1/chat/completions"
-        :stream t
+        :stream nil
         :key (auth-source-pick-first-password :host "api.groq.com")
         :models '(groq/compound
                   llama-3.3-70b-versatile

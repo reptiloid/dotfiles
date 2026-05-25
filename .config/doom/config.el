@@ -62,6 +62,10 @@
 
 (setq confirm-kill-emacs nil)
 
+(setenv "GPG_AGENT_INFO" nil)
+(setq epa-pinentry-mode 'loopback)
+(setq-default vterm-shell (executable-find "fish"))
+
 ;; Whether display icons in the mode-line.
 ;; While using the server mode in GUI, should set the value explicitly.
 (setq doom-modeline-icon t)
@@ -95,9 +99,10 @@
 
 (let ((alternatives '(
                       "emacs.svg"
-                      "doom-vapourwave.png"
-                      "doomEmacsDracula.svg"
-                      "logo-mini-doom.png"
+                      "skull.png"
+                      ;; "emacs.png"
+                      "demon1.png"
+                      "demon2.png"
                       )))
   (setq fancy-splash-image
         (concat doom-user-dir "images/"
@@ -216,6 +221,11 @@
                 "%?"
                 :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
                 :unnarrowed t)
+              
+            ("e" "enc" plain
+                "%?"
+                :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org.gpg" "#+title: ${title}\n")
+                :unnarrowed t)
 
             ("b" "book" plain
                 "\n* Source\n\nAuthor: %^{Author}\nTitle: ${title}\nYear: %^{Year}\n\n* Summary\n\n%?"
@@ -307,12 +317,12 @@
 
 )
 
-(setq gptel-model   'openai/gpt-oss-120b
+(setq gptel-model   'llama-3.3-70b-versatile
       gptel-backend
       (gptel-make-openai "Groq"
         :host "api.groq.com"
         :endpoint "/openai/v1/chat/completions"
-        :stream t
+        :stream nil
         :key (auth-source-pick-first-password :host "api.groq.com")
         :models '(groq/compound
                   llama-3.3-70b-versatile
