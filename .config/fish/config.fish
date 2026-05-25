@@ -21,6 +21,8 @@ alias mygeo="curl 'https://ipinfo.io/json'"
 
 alias rclone_all='func_rclone $buku_db_path $pwd_path $zoxide_db'
 
+alias wea='curl wttr.in/Санкт-Петербург?lang=ru&format=3'
+
 # alias pbpaste='xclip -selection clipboard -o'
 # 
 
@@ -35,19 +37,30 @@ set pwd_path "/home/rep/Documents/pwd/pwd.kdbx"
 function func_rclone -d "Backup files to dropbox and gdirve"
     for p in $argv
       echo "copy $p to GDRIVE"
-      rclone copy $p gdrive:backup -v
-      echo "--------------------------"
-      echo "--------------------------"
+      # rclone copy $p gdrive:backup -v
+      rclone copy $p gdrive:backup
       echo "copy $p to DROPBOX"
-      rclone copy $p dropbox:backup -v
+      rclone copy $p dropbox:backup
     end
 end
 
+if [ "$INSIDE_EMACS" = vterm ]
+
+    function clear
+        vterm_printf "51;Evterm-clear-scrollback"
+        tput clear
+    end
+
+    function fish_greeting
+        random choice "Hello!" "Hi" "G'day" "Howdy"
+    end
+else
+    function fish_greeting
+        ff
+    end
+
+end
 
 # alias gdriv='rclone copy $pwd_path gdrive:backup'
 # alias dropb='rclone copy $pwd_path dropbox:backup'
 
-function fish_greeting
-    # random choice "Hello!" "Hi" "G'day" "Howdy"
-    ff
-end
