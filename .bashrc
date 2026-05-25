@@ -198,8 +198,6 @@ alias ff="fastfetch"
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
 
-alias wgup="sudo wg-quick up wg0"
-alias wgdn="sudo wg-quick down wg0"
 
 
 yttweet() { yt "$@" | fabric -p tweet; }
@@ -529,7 +527,7 @@ export PATH=$PATH:"$HOME/.local/bin:$HOME/.cargo/bin"
 if xhost >& /dev/null ; then
   eval "$(starship init bash)"
   eval "$(fzf --bash)"
-  eval "$(atuin init bash)"
+  # eval "$(atuin init bash)"
 fi
 
 # export GPG_TTY="$(tty)"
@@ -567,3 +565,7 @@ export PATH=$BUN_INSTALL/bin:$PATH
 
 eval "$(zoxide init bash)"
 # source ~/.local/share/blesh/ble.sh
+
+# bun
+export BUN_INSTALL="$HOME/.local/share/reflex/bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
