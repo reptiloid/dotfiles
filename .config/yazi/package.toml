@@ -5,18 +5,48 @@ hash = "ca5c2ad5cccb94f93f3bf8eb2e9a1421"
 
 [[plugin.deps]]
 use = "imsi32/yatline"
-rev = "88bd1c5"
-hash = "981acbe9b758b1af3a8154c932bb936d"
+rev = "c5d4b48"
+hash = "e6e98d12b1648d1894c2b560d85eeaa7"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "03cdd4b"
-hash = "8a7c58225816a163a6e8730c0adafbc8"
+rev = "1962818"
+hash = "4c0260feb50ea2437380690ffc241da7"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:piper"
+rev = "1962818"
+hash = "384464b6df8cb807425c521f8cd790f3"
+
+[[plugin.deps]]
+use = "ndtoan96/ouch"
+rev = "406ce6c"
+hash = "f5afc904d5106ee368c8aa2ded43bd74"
+
+[[plugin.deps]]
+use = "wylie102/duckdb"
+rev = "3f8c863"
+hash = "87b9233a74325e95011670ed20bbd0d4"
+
+[[plugin.deps]]
+use = "MasouShizuka/projects"
+rev = "198c2ba"
+hash = "5eeb4f0919ce6be5d941a9290c131d7d"
+
+[[plugin.deps]]
+use = "AminurAlam/yazi-plugins:preview-audio"
+rev = "1d28640"
+hash = "e8a166503389d5a2165762daedb54821"
+
+[[plugin.deps]]
+use = "Ape/open-with-cmd"
+rev = "e3d430f"
+hash = "d29c1ffa99099181faf8c01d1f59aa4c"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-macchiato"
-rev = "4a1802a"
-hash = "b069dba45e199684b16fa12d385642ed"
+rev = "9511cb0"
+hash = "67f2240fd9c98f21714527a24cd672f8"
 
 [[flavor.deps]]
 use = "sanjinso/monokai-vibrant"

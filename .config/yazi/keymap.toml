@@ -6,6 +6,46 @@ run  = 'shell /usr/bin/fish --block'
 desc = "Open $SHELL here"
 
 [[mgr.prepend_keymap]]
+on = ["C"]
+run = "plugin ouch"
+desc = "Compress with ouch"
+
+[[mgr.prepend_keymap]]
 on   = "T"
 run  = "plugin toggle-pane max-preview"
 desc = "Maximize or restore the preview pane"
+
+[[mgr.prepend_keymap]]
+on = [ "P", "s" ]
+run = "plugin projects save"
+desc = "Save current project"
+
+[[mgr.prepend_keymap]]
+on = [ "P", "l" ]
+run = "plugin projects load"
+desc = "Load project"
+
+[[mgr.prepend_keymap]]
+on = [ "P", "P" ]
+run = "plugin projects load_last"
+desc = "Load last project"
+
+[[mgr.prepend_keymap]]
+on = [ "P", "d" ]
+run = "plugin projects delete"
+desc = "Delete project"
+
+[[mgr.prepend_keymap]]
+on   = [ "i" ]
+run = "plugin searchjump"
+desc = "searchjump mode"
+
+[[mgr.prepend_keymap]]
+on   = "o"
+run  = "plugin open-with-cmd -- block"
+desc = "Open with command in the terminal"
+
+[[mgr.prepend_keymap]]
+on   = "O"
+run  = "plugin open-with-cmd"
+desc = "Open with command"
